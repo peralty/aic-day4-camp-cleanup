@@ -2,15 +2,20 @@ import java.io.File
 
 fun main() {
     val allElfPairAssignments = parseInputToElfPairAssignments()
-    var countOfContainingAssignments = 0
+    var countOfFullyContainingAssignments = 0
+    var countOfPartlyContainingAssignments = 0
 
     allElfPairAssignments.forEach { elfPairAssignment ->
-        if (elfPairAssignment.oneAssignmentContainsOtherAssignment()) {
-            countOfContainingAssignments += 1
+        if (elfPairAssignment.oneAssignmentFullyContainsOtherAssignment()) {
+            countOfFullyContainingAssignments += 1
+        }
+        if (elfPairAssignment.oneAssignmentPartlyContainsOtherAssignment()) {
+            countOfPartlyContainingAssignments += 1
         }
     }
 
-    println("Anzahl an Assignment Pairs, in denen eine die Andere enthält: $countOfContainingAssignments")
+    println("Anzahl an Assignment Pairs mit vollständiger Überschneidung: $countOfFullyContainingAssignments")
+    println("Anzahl an Assignment Pairs mit teilweiser Überschneidung: $countOfPartlyContainingAssignments")
 }
 
 fun parseInputToElfPairAssignments(): List<ElfPairAssignment> {
